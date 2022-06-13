@@ -1,0 +1,1 @@
+Colocar aqui, neste diretório, imagens para treino do modelo.

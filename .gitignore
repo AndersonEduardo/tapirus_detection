@@ -1,0 +1,7 @@
+*.weights
+*.jpg
+*.jpeg
+*.zip
+__pycache__/
+*.pyc
+outputs/
