@@ -1,0 +1,1 @@
+Colocar aqui, neste diretório, o arquivo de pesos da rede neural.
