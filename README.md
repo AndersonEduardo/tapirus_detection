@@ -1,4 +1,4 @@
-# Identificador de Antas
+# Identificador Antológico
 
 ## *Um Bot para identificação de Tapirus terrestris em conjuntos de dados de fotografias.*
 
