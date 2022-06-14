@@ -22,18 +22,37 @@ echo.
 echo STATUS: Checking for Python in your system...
 echo.
 python.exe --version >NUL 2>&1
-if errorlevel 1 goto nopython
+if errorlevel 1 goto NOPYTHON
 echo.
 echo STATUS: ...Python is successfully installed and running in your system.
+echo.
+goto INSTALLPACKAGES
+
+::instalando pacotes
+:INSTALLPACKAGES
+echo.
+echo STATUS: Checking for python packages...
+echo.
+pip3 install -r requirements.txt
+if errorlevel 1 goto PIPERROR
+echo.
+echo STATUS: ...packages are Ok.
 echo.
 goto RUNID
 
 ::erro python
 :NOPYTHON
 echo.
-echo STATUS: python not found. Make sure it is installed and you are using Anaconda Prompt to run this program.
+echo STATUS: Python not found. Make sure it is installed and you are using Anaconda Prompt to run this program.
 echo.
-goto end
+goto END
+
+::erro no pip install
+:PIPERROR
+echo.
+echo STATUS: Failure in installing python packages.
+echo.
+goto END
 
 ::rodando analise dos arquivos
 :RUNID
@@ -42,6 +61,16 @@ echo STATUS: Analysing files...
 echo.
 echo python tapirus_detection.py %par_a% %par_b%
 python tapirus_detection.py %par_a% %par_b%
+if errorlevel 1 goto ANALYSISERROR
+echo.
+echo STATUS: ...files analysis completed.
+echo.
+
+:ANALYSISERROR
+echo.
+echo STATUS: Failure running analysis.
+echo.
+goto END
 
 :: fechamento
 :END
