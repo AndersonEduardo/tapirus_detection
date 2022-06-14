@@ -7,8 +7,7 @@
 Antes de tudo, configure seu ambiente computacional, conforme as seguintes especificações:
 
 - Sistema operacional **MS Windows** (versão *10* ou mais recente);
-- Ter o **R** (alguma de suas versões mais recentes) instalado e configurado nas **variáveis de ambiente** do seu sistema;
-- Ter o **Python Anaconda** (alguma de suas versões mais recentes) instalado e configurado nas **variáveis de ambiente** do seu sistema;
+- Ter o **Python Anaconda** (alguma de suas versões mais recentes - [link](https://www.anaconda.com/products/distribution)) instalado e configurado nas **variáveis de ambiente** do seu sistema;
 
 **Passos para rodar a análise:**
 
