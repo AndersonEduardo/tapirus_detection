@@ -7,11 +7,13 @@
 Antes de tudo, configure seu ambiente computacional, conforme as seguintes especificações:
 
 - Sistema operacional **MS Windows** (versão *10* ou mais recente);
-- Ter o **Python Anaconda** (alguma de suas versões mais recentes - [link](https://www.anaconda.com/products/distribution)) instalado.
+- Ter o **Python Anaconda** (alguma de suas versões mais recentes - [*link*](https://www.anaconda.com/products/distribution)) instalado.
 
 **Passos para rodar a análise:**
 
 1) Primeiramente, faça o *download* deste repositório para sua máquina local (extraia todos os arquivos em um diretório dedicado exclusivamente para este trabalho). A opção de download fica no *botão verde*, na parte superior à direita desta página.
+
+2) Faça download do arquivo de pesos da rede neural, a partir deste [*link*](https://drive.google.com/file/d/1sIUXOMhglIfQ8rapCSox-ohVxHZnCEE2/view).
 
 2) Para a atual versão, coloque suas fotos (formato `.jpg`) na pasta `test_images`.
 
