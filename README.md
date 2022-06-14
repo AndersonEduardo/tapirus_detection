@@ -12,7 +12,7 @@ Antes de tudo, configure seu ambiente computacional, conforme as seguintes espec
 
 **Passos para rodar a análise:**
 
-1) Primeiramente, faça o *download* deste repositório para sua máquina local (extraia todos os arquivos em um diretório dedicado exclusivamente para este trabalho).
+1) Primeiramente, faça o *download* deste repositório para sua máquina local (extraia todos os arquivos em um diretório dedicado exclusivamente para este trabalho). A opção de download fica no *botão verde*, na parte superior à direita desta página.
 
 2) Para a atual versão, coloque suas fotos (formato `.jpg`) na pasta `test_images`.
 
