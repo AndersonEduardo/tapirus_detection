@@ -1,3 +1,4 @@
+import sys
 import cv2
 import glob
 import random
@@ -9,6 +10,7 @@ import pandas as pd
 
 from parameters import *
 
+
 if __name__ == '__main__':
 
     # parser
@@ -18,19 +20,22 @@ if __name__ == '__main__':
         '-i',
         metavar='--iteractive',
         type=str.lower,
-        default='false',
+        default=None,
         help='Option for running the app in iteractive mode.'
-        )
+    )
 
      # coletando os parametros de input
     args = my_parser.parse_args()
 
     if isinstance(args.i, str):
+
         mode = args.i
+
     else:
+
         raise TypeError(
     '`-i` must be a string informing `true` or `false`.'
-    )
+        )
 
 
     if mode == 'true':
@@ -44,10 +49,17 @@ if __name__ == '__main__':
         # Images path
         images_path = glob.glob(IMAGES_PATH + '/*.jpg')
 
+        if len(images_path) == 0:
+
+            print('Não foram enontrados arquivos de input. Finalizando execução.')
+
+            sys.exit()
+
         layer_names = net.getLayerNames()
         #output_layers = [layer_names[i[0] - 1] for i in net.getUnconnectedOutLayers()]
         output_layers = [layer_names[i - 1] for i in net.getUnconnectedOutLayers()]
-        colors = np.random.uniform(0, 255, size=(len(classes), 3))
+        # colors = np.random.uniform(0, 255, size=(len(classes), 3))
+        colors = [[0,255,0]]
 
         # Insert here the path of your images
         random.shuffle(images_path)
@@ -127,7 +139,35 @@ if __name__ == '__main__':
 
         cv2.destroyAllWindows()
 
-    else:
+
+    elif mode == 'false':
+
+        # checando se o usuario deseja sobrebreescrever o output
+        if os.path.exists(os.path.join('outputs', OUTPUT_FILENAME)):
+
+            answer = list()
+
+            while len(answer) == 0:
+            
+                answer = input(
+        '\nSTATUS: ATENÇÃO! Um arquivo output.csv já existe. Tem certeza que gostaria de sobreescrever? (s=sim ou n=não) '
+                )
+
+                if len(answer) > 0 and answer.lower().strip()[0] == 'n':
+
+                    print('\nSTATUS: interrompendo a execução. Por favor, proceda com a remoção do antigo arquivo output.csv.\n')
+
+                    sys.exit()
+
+                elif len(answer) > 0 and answer.lower().strip()[0] == 's':
+
+                    pass
+
+                else:
+
+                    print('\nSTATUS: por favor, responda s (para sim) ou n (para não).')
+
+                    answer = list()
 
         # output dataframe
         output_df = pd.DataFrame()
@@ -146,6 +186,13 @@ if __name__ == '__main__':
 
         # Images path
         images_path = glob.glob(IMAGES_PATH + '/*.jpg')
+
+        # checando se exitem arquivos
+        if len(images_path) == 0:
+
+            print('\nSTATUS: não foram enontrados arquivos de input. Finalizando execução.\n')
+
+            sys.exit()
 
         layer_names = net.getLayerNames()
         #output_layers = [layer_names[i[0] - 1] for i in net.getUnconnectedOutLayers()]
@@ -194,7 +241,7 @@ if __name__ == '__main__':
                     if confidence > CONFIDENCE_THRESHOLD:
 
                         # Object detected
-                        print(class_id)
+                        print('class_id:', class_id)
     
                         center_x = int(detection[0] * width)
                         center_y = int(detection[1] * height)
@@ -217,11 +264,13 @@ if __name__ == '__main__':
 
             # font = cv2.FONT_HERSHEY_PLAIN
 
-            for i in range(len(boxes)):
+            if len(boxes) > 0:
 
-                if i in indexes:
+                for i in range(len(boxes)):
 
-                    if os.path.exists(img_path):
+                    if i in indexes:
+
+                        # if os.path.exists(img_path):
 
                         # x, y, w, h = boxes[i]
                         label = str(classes[class_ids[i]])
@@ -234,27 +283,39 @@ if __name__ == '__main__':
                             dst = os.path.join('outputs','positive')
                         )
 
-                else:
+                    else:
 
-                    if os.path.exists(img_path):
+                        # if os.path.exists(img_path):
 
                         label = 'None'
 
                         shutil.move(
                                 src = img_path,
                                 dst = os.path.join('outputs','negative')
-                            )
+                        )
 
-                # output file
-                output_df = output_df\
-                    .append(
-                            {
-                                # 'class_id': class_id[i],
-                                'label': label,
-                                'img_path': img_path
-                            },
-                            ignore_index=True
-                    )
+                    break
+
+
+            else:
+
+                label = 'None'
+
+                shutil.move(
+                        src = img_path,
+                        dst = os.path.join('outputs','negative')
+                )
+
+            # output file
+            output_df = output_df\
+                .append(
+                        {
+                            # 'class_id': class_id[i],
+                            'label': label,
+                            'img_path': img_path
+                        },
+                        ignore_index=True
+            )
 
         #     cv2.imshow("Image", img)
 
@@ -262,4 +323,12 @@ if __name__ == '__main__':
 
         # cv2.destroyAllWindows()
 
-        output_df.to_csv('output.csv', index=False, sep=',')
+        output_df.to_csv(
+            os.path.join('outputs', OUTPUT_FILENAME), 
+            index=False, 
+            sep=','
+        )
+
+    else:
+
+        raise InputError('The parameter `i` must be provided (-i true OR -i false).')

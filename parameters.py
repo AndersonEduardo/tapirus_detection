@@ -5,3 +5,4 @@ MODEL_CONFIG = os.path.join('model_config', 'yolov3_testing.cfg')
 IMAGES_PATH = os.path.join('test_images')
 CLASSES = ['Anta']
 CONFIDENCE_THRESHOLD = 0.33
+OUTPUT_FILENAME = 'output.csv'
