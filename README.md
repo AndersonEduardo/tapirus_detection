@@ -11,7 +11,7 @@ Antes de tudo, configure seu ambiente computacional, conforme as seguintes espec
 
 **Passos (obrigatórios!) para rodar a análise:**
 
-1) Primeiramente, faça o *download* deste repositório para sua máquina local (extraia todos os arquivos em um diretório dedicado exclusivamente para este trabalho). A opção de download fica no *botão verde*, na parte superior à direita desta página. (ou então, clique [aqui](https://github.com/AndersonEduardo/tapirus_detection/archive/refs/heads/main.zip)).
+1) Primeiramente, faça o *download* deste repositório para sua máquina local (extraia todos os arquivos em um diretório dedicado exclusivamente para este trabalho). A opção de download fica no *botão verde*, na parte superior à direita desta página. (Ou apenas clique [aqui](https://github.com/AndersonEduardo/tapirus_detection/archive/refs/heads/main.zip)).
 
 2) Faça download do arquivo de pesos da rede neural, a partir deste [*link*](https://drive.google.com/file/d/1sIUXOMhglIfQ8rapCSox-ohVxHZnCEE2/view). Mova o arquivo baixado para a pasta `model_weights`.
 
